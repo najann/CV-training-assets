@@ -1,14 +1,17 @@
-from tf_text_graph_faster_rcnn import createFasterRCNNGraph
-from tf_text_graph_ssd import createSSDGraph
-from tf_text_graph_common import readTextMessage
-
-from common import *
-import cv2 as cv
 import argparse
-import numpy as np
 import sys
 import time
 from threading import Thread
+
+import cv2 as cv
+import numpy as np
+
+from common import *
+from tf_text_graph_common import readTextMessage
+from tf_text_graph_faster_rcnn import createFasterRCNNGraph
+from tf_text_graph_ssd import createSSDGraph
+
+
 if sys.version_info[0] == 2:
     import Queue as queue
 else:

@@ -1,0 +1,18 @@
+html {
+    background: url(/images/yolo-footer.jpg) no-repeat center fixed;
+    background-size: cover;
+}
+
+body {
+    background-color: transparent;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+#main_container {
+    padding: 10px 10px 0px 10px;
+    font-size: 1em;
+    max-width: 100%;
+    margin-top: 40px;
+}
