@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-docker-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: yolo-docker
+  template:
+    metadata:
+      labels:
+        app: yolo-docker
+    spec:
+      containers:
+        - name: yolo-docker
+          image: us.icr.io/comvis/yolodeploy:latest

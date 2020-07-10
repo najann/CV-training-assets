@@ -90,7 +90,7 @@ def get_predictions(layerOutputs):
     return idxs
 
 
-def annotate_image(image, idxs):
+def annotate_image(image, idxs, name):
 
     # load the COCO class labels our YOLO model was trained on
     labelsPath = os.path.sep.join([COCO_FOLDER, "coco.names"])
@@ -127,4 +127,4 @@ def annotate_image(image, idxs):
             cv2.putText(image, text, (x, y - np.random.randint(5, 30)), cv2.FONT_HERSHEY_SIMPLEX,
                         scale, color, fs)
     cv2.imwrite(os.path.sep.join(
-        ["yolo", "cvdetect", "output", "predicted.jpg"]), image)
+        ["yolo", "cvdetect", "output", f"{name}_predicted.jpg"]), image)

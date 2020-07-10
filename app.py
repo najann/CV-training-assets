@@ -61,8 +61,8 @@ def localize_classify():
     idxs = get_predictions(layers)
     if len(idxs) == 0:
         error = True
-    annotate_image(image, idxs)
-    return template('result', error=error)
+    annotate_image(image, idxs, name)
+    return template('result', error=error, file=f"/predictions/{name}_predicted.jpg")
 
 
 if __name__ == '__main__':
