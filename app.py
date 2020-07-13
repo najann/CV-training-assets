@@ -4,6 +4,7 @@ import numpy as np
 
 from bottle import (
     default_app,
+    error,
     get,
     post,
     request,
@@ -22,15 +23,23 @@ from yolo.cvdetect.yolo import (
 IMAGE_FOLDER = os.path.sep.join(["yolo", "cvdetect", "images"])
 PATH = os.path.abspath(__file__)
 ROOT = os.path.dirname(PATH)
+NET = initialize_net()
 
 application = default_app()
 
 
+@error(404)
+def error_handler_404(error):
+    return template('error', error='404')
+
+
+@error(500)
+def error_handler_500(error):
+    return template('error', error='500')
+
+
 @get('/')
 def index():
-    global net
-    net = initialize_net()
-    print(PATH, ROOT)
     return template('home')
 
 
@@ -57,7 +66,7 @@ def localize_classify():
     if ext.lower() not in ('.png', '.jpg', '.jpeg'):
         return 'File extension not allowed.'
     image = np.asarray(bytearray(image.file.read()), dtype="uint8")
-    layers = process_image(image, net)
+    layers = process_image(image, NET)
     idxs = get_predictions(layers)
     if len(idxs) == 0:
         error = True
