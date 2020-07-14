@@ -2,10 +2,13 @@ import os
 
 import numpy as np
 
+from PIL import Image
+
 from bottle import (
     default_app,
     error,
     get,
+    HTTPResponse,
     post,
     request,
     run,
@@ -22,6 +25,7 @@ from yolo.cvdetect.yolo import (
 
 PATH = os.path.abspath(__file__)
 ROOT = os.path.dirname(PATH)
+IM_OUT = os.path.sep.join([ROOT, 'yolo', 'cvdetect', 'output'])
 NET = initialize_net()
 
 application = default_app()
@@ -35,6 +39,11 @@ def error_handler_404(error):
 @error(500)
 def error_handler_500(error):
     return template('error', error='500')
+
+
+@error(418)
+def error_handler_418(error):
+    return template('error', error='418')
 
 
 @get('/')
@@ -54,7 +63,7 @@ def send_image(filename):
 
 @get('/predictions/<filename:re:.*\.jpg>')
 def send_result(filename):
-    return static_file(filename, root=os.path.sep.join([ROOT, 'yolo', 'cvdetect', 'output']), mimetype='image/jpg')
+    return static_file(filename, root=IM_OUT, mimetype='image/jpg')
 
 
 @post('/analyze')
@@ -66,7 +75,7 @@ def localize_classify():
     image = request.files.get('unpredicted')
     name, ext = os.path.splitext(image.filename)
     if ext.lower() not in ('.png', '.jpg', '.jpeg'):
-        return 'File extension not allowed.'
+        return HTTPResponse(status=418, body=theBody)
     image = np.asarray(bytearray(image.file.read()), dtype="uint8")
     layers = process_image(image, NET)
 
@@ -74,6 +83,9 @@ def localize_classify():
     if len(idxs) == 0:
         error = True
     annotate_image(image, idxs, name)
+    optimize = Image.open(os.path.sep.join([IM_OUT, f"{name}_predicted.jpg"]))
+    optimize.save(os.path.sep.join(
+        [IM_OUT, f"{name}_predicted.jpg"]), optimize=True, quality=50)
 
     return template('result', error=error, file=f"/predictions/{name}_predicted.jpg")
 
@@ -84,4 +96,4 @@ if __name__ == '__main__':
         port = int(os.environ.get("PORT"))
     else:
         port = '8080'
-    run(host='0.0.0.0', port=port)  # , server='tornado')
+    run(host='0.0.0.0', port=port, server='tornado')

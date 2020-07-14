@@ -17,6 +17,15 @@
     an try again.
 </h3>
 
+% elif error == '418':
+<h3 class="subtitle">Sorry, I'm a teapot (jpg, jpeg, png) who refuses to brew coffee (whatever other file you gave me)!
+    <br>
+    <hr>
+    Please,
+    <a class="errorlink" href="#" onclick="goHome()">go back</a>
+    an try your luck with an <i>image</i>.
+</h3>
+
 % else:
 <h3 class="subtitle">Sorry, this doesn't work.
     <br>

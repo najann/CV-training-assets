@@ -24,7 +24,7 @@ hr {
     width: 25%;
     margin: auto;
     border: 2px solid #2E2EFE;
-    margin-top: 10px;
+    margin-top: 20px;
     border-radius: 8px;
     color: white;
 }
@@ -45,7 +45,11 @@ button {
 }
 
 select {
-    margin: 20px
+    margin-bottom: 10px
+}
+
+#unpredicted {
+    margin-bottom: 20px;
 }
 
 .disabled {
