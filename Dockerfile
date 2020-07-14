@@ -15,4 +15,4 @@ EXPOSE 8080
 RUN wget -nv -P /app/yolo/cvdetect/yolo-coco https://pjreddie.com/media/files/yolov3.weights
 
 COPY . /app
-ENTRYPOINT [ "python3", "app.py" ]
+CMD [ "python3", "app.py" ]
