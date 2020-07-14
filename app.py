@@ -61,13 +61,15 @@ def send_result(filename):
 @post('/analyze')
 def localize_classify():
     error = False
+    confidence = float(request.forms.get('confidence'))
+    thresh = float(request.forms.get('threshold'))
     image = request.files.get('unpredicted')
     name, ext = os.path.splitext(image.filename)
     if ext.lower() not in ('.png', '.jpg', '.jpeg'):
         return 'File extension not allowed.'
     image = np.asarray(bytearray(image.file.read()), dtype="uint8")
     layers = process_image(image, NET)
-    idxs = get_predictions(layers)
+    idxs = get_predictions(layers, confidence, thresh)
     if len(idxs) == 0:
         error = True
     annotate_image(image, idxs, name)
@@ -75,4 +77,5 @@ def localize_classify():
 
 
 if __name__ == '__main__':
-    run(host='0.0.0.0', port=8080, reloader=True)
+    # run(host='0.0.0.0', port=8080, reloader=True)
+    run(host='0.0.0.0', port=8080)  # , server='tornado')

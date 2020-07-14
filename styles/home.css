@@ -44,6 +44,7 @@ button {
     margin: 10px;
 }
 
+
 .disabled {
     opacity: 0.6;
     pointer-events: none;

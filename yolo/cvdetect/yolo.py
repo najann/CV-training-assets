@@ -40,7 +40,7 @@ def process_image(image, net):
     return layerOutputs
 
 
-def get_predictions(layerOutputs):
+def get_predictions(layerOutputs, confval=0.5, thresh=0.3):
 
     # initialize lists of detected bounding boxes, confidences, class IDs
     global boxes
@@ -64,7 +64,7 @@ def get_predictions(layerOutputs):
             confidence = scores[classID]
 
             # filter out weak predictions
-            if confidence < 0.5:
+            if confidence < confval:
                 continue
 
             # scale the bounding box coordinates back relative to the
@@ -85,7 +85,7 @@ def get_predictions(layerOutputs):
             classIDs.append(classID)
 
             # apply non-maxima suppression to avoid weak, overlapping bounding boxes
-            idxs = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.3)
+            idxs = cv2.dnn.NMSBoxes(boxes, confidences, confval, thresh)
 
     return idxs
 

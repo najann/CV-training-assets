@@ -1,4 +1,5 @@
 docker build -t us.icr.io/comvis/yolodeploy:latest .
+ibmcloud cr image-rm us.icr.io/comvis/yolodeploy:latest
 docker push us.icr.io/comvis/yolodeploy:latest
 kubectl apply -f yolo-docker-deployment.yaml
 kubectl apply -f yolo-service.yaml
