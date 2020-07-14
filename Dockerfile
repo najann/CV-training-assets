@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y libsm6 libxext6 libxrender-dev libglib2
 COPY ./requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
 EXPOSE 8080
-RUN wget -nv -P /app/yolo/cvdetect/yolo-coco https://pjreddie.com/media/files/yolov3.weights
+# RUN wget -nv -P /app/yolo/cvdetect/yolo-coco https://pjreddie.com/media/files/yolov3.weights
 
 COPY . /app
 CMD [ "python3", "app.py" ]

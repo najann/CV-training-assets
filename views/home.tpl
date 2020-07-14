@@ -8,7 +8,7 @@
       <input onclick="enableStyle('analyze')" type="file" id="unpredicted" name="unpredicted" accept="image" />
     </label>
     <br>
-    <label> Define a confidence score:
+    <label> Confidence score for the objects:
       <select name="confidence" id="confidence">
         <option value="0.1">0.1</option>
         <option value="0.2">0.2</option>
@@ -22,7 +22,9 @@
       </select>
     </label>
     <br>
-    <label> Define a threshold:
+    <label> <a class="errorlink" href="https://towardsdatascience.com/non-maximum-suppression-nms-93ce178e177c"
+        rel="noopener">NMS</a> threshold
+      for overlapping objects:
       <select name="threshold" id="threshold">
         <option value="0.1">0.1</option>
         <option value="0.2">0.2</option>
