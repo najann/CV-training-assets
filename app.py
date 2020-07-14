@@ -20,7 +20,6 @@ from yolo.cvdetect.yolo import (
 )
 
 
-IMAGE_FOLDER = os.path.sep.join(["yolo", "cvdetect", "images"])
 PATH = os.path.abspath(__file__)
 ROOT = os.path.dirname(PATH)
 NET = initialize_net()
@@ -63,19 +62,26 @@ def localize_classify():
     error = False
     confidence = float(request.forms.get('confidence'))
     thresh = float(request.forms.get('threshold'))
+
     image = request.files.get('unpredicted')
     name, ext = os.path.splitext(image.filename)
     if ext.lower() not in ('.png', '.jpg', '.jpeg'):
         return 'File extension not allowed.'
     image = np.asarray(bytearray(image.file.read()), dtype="uint8")
     layers = process_image(image, NET)
+
     idxs = get_predictions(layers, confidence, thresh)
     if len(idxs) == 0:
         error = True
     annotate_image(image, idxs, name)
+
     return template('result', error=error, file=f"/predictions/{name}_predicted.jpg")
 
 
 if __name__ == '__main__':
     # run(host='0.0.0.0', port=8080, reloader=True)
-    run(host='0.0.0.0', port=8080)  # , server='tornado')
+    if os.environ.get('ON_HEROKU'):
+        port = int(os.environ.get("PORT"))
+    else:
+        port = '8080'
+    run(host='0.0.0.0', port=port)  # , server='tornado')

@@ -44,6 +44,9 @@ button {
     margin: 10px;
 }
 
+select {
+    margin: 20px
+}
 
 .disabled {
     opacity: 0.6;
