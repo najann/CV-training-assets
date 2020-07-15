@@ -1,0 +1,60 @@
+#home_container {
+    width: 60%;
+    margin: auto;
+}
+
+hr {
+    color: #2E2EFE;
+    margin-bottom: 35px;
+    margin-top: 25px;
+    width: 50%;
+    height: 2px;
+    background-color: #2E2EFE;
+    border: 2px solid #2E2EFE;
+    border-radius: 3px;
+}
+
+#submitwrapper {
+    width: 100%;
+}
+
+#analyze {
+    background-color: #2E2EFE;
+    min-width: min-content;
+    width: 25%;
+    margin: auto;
+    border: 2px solid #2E2EFE;
+    margin-top: 20px;
+    border-radius: 8px;
+    color: white;
+}
+
+button {
+    padding: 5px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input,
+button {
+    margin: 10px;
+}
+
+select {
+    margin-bottom: 10px
+}
+
+#unpredicted {
+    margin-bottom: 20px;
+}
+
+.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+    color: #0B2161;
+}
