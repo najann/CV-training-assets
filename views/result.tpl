@@ -2,6 +2,7 @@
 
 <div class="resultwrapper">
     <a href='/predictions/{{file}}' download><img src='/predictions/{{file}}' /></a>
+    <!-- use redirect to delete image before going back home -->
     <button id="backhome" onclick="window.location='/del/{{file}}'">
         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
     </button>

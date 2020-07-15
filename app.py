@@ -39,7 +39,7 @@ def error_handler_404(error):
 def error_handler_500(error):
     return template('error', error='500')
 
-
+# a joke HTTP error but useful for wrong image upload formats
 @error(418)
 def error_handler_418(error):
     return template('error', error='418')
@@ -49,29 +49,29 @@ def error_handler_418(error):
 def index():
     return template('home')
 
-
+# delete output files
 @get('/del/<filename:re:.*\.jpg>')
 def del_image(filename):
     if os.path.exists(os.path.sep.join([IM_OUT, filename])):
         os.remove(os.path.sep.join([IM_OUT, filename]))
     redirect('/')
 
-
+# stylesheets
 @get('/styles/<filename:re:.*\.css>')
 def send_file(filename):
     return static_file(filename, root=os.path.sep.join([ROOT, 'styles']))
 
-
+# background image
 @get('/images/<filename:re:.*\.jpg>')
 def send_image(filename):
     return static_file(filename, root=os.path.sep.join([ROOT, 'styles', 'images']))
 
-
+# return output file
 @get('/predictions/<filename:re:.*\.jpg>')
 def send_result(filename):
     return static_file(filename, root=IM_OUT, mimetype='image/jpg')
 
-
+# process uploaded image
 @post('/analyze')
 def localize_classify():
     error = False
@@ -81,14 +81,20 @@ def localize_classify():
     image = request.files.get('unpredicted')
     name, ext = os.path.splitext(image.filename)
     if ext.lower() not in ('.png', '.jpg', '.jpeg'):
-        return HTTPResponse(status=418, body=theBody)
+        # let's have some fun
+        return HTTPResponse(status=418)
+
+    # convert image to numpy array and send through YOLO net
     image = np.asarray(bytearray(image.file.read()), dtype="uint8")
     layers = process_image(image, NET)
 
     idxs = get_predictions(layers, confidence, thresh)
+    # no objects detected ? cause error modal to pop up
     if len(idxs) == 0:
         error = True
     annotate_image(image, idxs, name)
+
+    # optimize image size to improve loading time
     optimize = Image.open(os.path.sep.join([IM_OUT, f"{name}_predicted.jpg"]))
     optimize.save(os.path.sep.join(
         [IM_OUT, f"{name}_predicted.jpg"]), optimize=True, quality=50)
