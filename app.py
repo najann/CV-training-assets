@@ -1,15 +1,15 @@
 import os
 
 import numpy as np
-
 from PIL import Image
 
 from bottle import (
+    HTTPResponse,
     default_app,
     error,
     get,
-    HTTPResponse,
     post,
+    redirect,
     request,
     run,
     static_file,
@@ -23,8 +23,7 @@ from yolo.cvdetect.yolo import (
 )
 
 
-PATH = os.path.abspath(__file__)
-ROOT = os.path.dirname(PATH)
+ROOT = os.path.dirname(os.path.abspath(__file__))
 IM_OUT = os.path.sep.join([ROOT, 'yolo', 'cvdetect', 'output'])
 NET = initialize_net()
 
@@ -49,6 +48,13 @@ def error_handler_418(error):
 @get('/')
 def index():
     return template('home')
+
+
+@get('/del/<filename:re:.*\.jpg>')
+def del_image(filename):
+    if os.path.exists(os.path.sep.join([IM_OUT, filename])):
+        os.remove(os.path.sep.join([IM_OUT, filename]))
+    redirect('/')
 
 
 @get('/styles/<filename:re:.*\.css>')
@@ -87,13 +93,11 @@ def localize_classify():
     optimize.save(os.path.sep.join(
         [IM_OUT, f"{name}_predicted.jpg"]), optimize=True, quality=50)
 
-    return template('result', error=error, file=f"/predictions/{name}_predicted.jpg")
+    return template('result', error=error, file=f"{name}_predicted.jpg")
 
 
 if __name__ == '__main__':
-    # run(host='0.0.0.0', port=8080, reloader=True)
     if os.environ.get('ON_HEROKU'):
-        port = int(os.environ.get("PORT"))
+        run(host='0.0.0.0', port=int(os.environ.get("PORT")), server='tornado')
     else:
-        port = '8080'
-    run(host='0.0.0.0', port=port, server='tornado')
+        run(host='0.0.0.0', port=8080, reloader=True)

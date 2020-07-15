@@ -1,8 +1,8 @@
 % rebase('base.tpl', title='YOLO Result')
 
 <div class="resultwrapper">
-    <a href={{file}} download><img src={{file}} /></a>
-    <button id="backhome" onclick="goHome()">
+    <a href='/predictions/{{file}}' download><img src='/predictions/{{file}}' /></a>
+    <button id="backhome" onclick="window.location='/del/{{file}}'">
         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
     </button>
 </div>
