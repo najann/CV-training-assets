@@ -106,4 +106,4 @@ if __name__ == '__main__':
     if os.environ.get('ON_HEROKU'):
         run(host='0.0.0.0', port=int(os.environ.get("PORT")), server='tornado')
     else:
-        run(host='0.0.0.0', port=8080, reloader=True)
+        run(host='0.0.0.0', port=8080, reloader=True, debug=True)
