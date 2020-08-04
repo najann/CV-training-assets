@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
-python setup.py develop
-python runapp.py
+python3 setup.py develop
+python3 runapp.py
