@@ -1,16 +1,13 @@
 from pyramid.view import view_config
 from pyramid.renderers import render_to_response
 from pyramid.response import Response
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPInternalServerError
+from pyramid.httpexceptions import HTTPFound
 
 import colander
-import deform.widget
 import os
 import numpy as np
 from rcnn import rcnn as rcnn
 from PIL import Image
-
-response = HTTPNotFound('There is no such resource')
 
 
 class MainViews:
@@ -29,9 +26,6 @@ class MainViews:
         name, ext = os.path.splitext(self.request.POST['unpredicted'].filename)
         if ext.lower() not in ('.png', '.jpg', '.jpeg'):
             return 'Sorry, not a supported file format'
-
-            # let's have some fun
-        # return HTTPResponse(status=418)
         upload = self.request.POST['unpredicted'].file
         image = np.asarray(bytearray(upload.read()), dtype="uint8")
         confidence = float(self.request.POST['confidence'])

@@ -1,0 +1,12 @@
+colander==1.7.0
+matplotlib==3.3.0
+numpy==1.19.0
+opencv-contrib-python==4.3.0.36
+Pillow==7.2.0
+pyramid==1.10.4
+pyramid-chameleon==0.3
+pyramid-jinja2==2.8
+torch==1.5.1
+torchvision==0.6.1
+paste==3.4.3
+gunicorn==20.0.4

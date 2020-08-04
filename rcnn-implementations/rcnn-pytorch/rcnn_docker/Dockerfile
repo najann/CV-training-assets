@@ -11,8 +11,8 @@ RUN pip3 install --upgrade pip
 RUN apt-get update && apt-get install -y libsm6 libxext6 libxrender-dev libglib2.0-0 wget
 COPY ./requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
-EXPOSE 8080
-# RUN wget -nv -P /app/yolo/cvdetect/yolo-coco https://pjreddie.com/media/files/yolov3.weights
+EXPOSE 5000
 
 COPY . /app
-CMD [ "python3", "app.py" ]
+RUN  set -e && python setup.py develop
+CMD [ "python", "runapp.py" ]
