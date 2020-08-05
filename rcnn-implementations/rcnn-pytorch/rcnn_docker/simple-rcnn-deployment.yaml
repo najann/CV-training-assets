@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-rcnn-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: simplercnn
+  template:
+    metadata:
+      labels:
+        app: simplercnn
+    spec:
+      containers:
+        - name: simplercnn
+          image: us.icr.io/comvis/simplercnn:latest

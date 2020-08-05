@@ -1,4 +1,8 @@
 #!/bin/bash
 set -e
+python3 -m pip install torch==1.5.0+cpu torchvision==0.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+mkdir -p /app/.cache/torch/checkpoints
+mv /app/rcnn/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth /app/.cache/torch/checkpoints/
+pip install -e .
 python3 setup.py develop
 python3 runapp.py

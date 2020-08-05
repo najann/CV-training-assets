@@ -3,11 +3,9 @@ from pyramid.renderers import render_to_response
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
 
-import colander
 import os
 import numpy as np
 from rcnn import rcnn as rcnn
-from PIL import Image
 
 
 class MainViews:
@@ -33,8 +31,6 @@ class MainViews:
         if len(pred_box) == 0:
             error = True
         result = rcnn.make_result(image, name, pred_box, pred_class)
-        optimize = Image.open(result)
-        optimize.save(result, optimize=True, quality=50)
 
         return render_to_response('result.jinja2', dict(error=error, filename=result.split('/')[-1], css_url=self.css_url), request=self)
 

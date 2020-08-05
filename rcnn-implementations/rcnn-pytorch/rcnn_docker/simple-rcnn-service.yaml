@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-rcnn-service
+spec:
+  selector:
+    app: simplercnn
+  type: NodePort
+  ports:
+    - port: 5000
+      nodePort: 31323

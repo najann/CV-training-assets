@@ -59,9 +59,6 @@ def get_prediction(img, threshold=0.5):
 def make_result(img, name, boxes, classes):
     import matplotlib.pyplot as plt
     image = read_img(img)
-    # boxes, pred_cls = get_prediction(img_path, threshold)
-    # img = cv2.imread(img)
-    # img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert to RGB
     COLORS = np.random.randint(0, 256, size=(
         len(np.unique(classes)), 3), dtype="uint8")
     pred_dict = dict(zip(np.unique(classes), COLORS))
