@@ -17,7 +17,7 @@ body {
 }
 
 .errorlink {
-    color: lightgray;
+    color: rgb(121, 121, 121);
     text-decoration: none;
 }
 
@@ -36,4 +36,15 @@ button {
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+}
+
+hr {
+    color: #2E2EFE;
+    margin-bottom: 35px;
+    margin-top: 25px;
+    width: 50%;
+    height: 2px;
+    background-color: #2E2EFE;
+    border: 2px solid #2E2EFE;
+    border-radius: 3px;
 }

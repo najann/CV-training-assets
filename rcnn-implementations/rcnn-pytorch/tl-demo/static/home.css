@@ -3,17 +3,6 @@
     margin: auto;
 }
 
-hr {
-    color: #2E2EFE;
-    margin-bottom: 35px;
-    margin-top: 25px;
-    width: 50%;
-    height: 2px;
-    background-color: #2E2EFE;
-    border: 2px solid #2E2EFE;
-    border-radius: 3px;
-}
-
 #submitwrapper {
     width: 100%;
 }
