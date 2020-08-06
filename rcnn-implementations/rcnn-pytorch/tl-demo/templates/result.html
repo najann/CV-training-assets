@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Classification Result{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}" />
+<script>
+    function goHome() {
+        window.location = '/';
+    }
+</script>
+{% endblock %}
+{% block content %}
+<div class="resultwrapper">
+    <img src="{{filename}}" /></a>
+    <h2>{{ pred|replace('"', '')|capitalize }}</h2>
+    <!-- use redirect to delete image before going back home -->
+    {% set filename = filename.split("/")[-1] %}
+    <button id="backhome" onclick="window.location='/del/{{filename}}'">
+        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+    </button>
+</div>
+
+<!-- Only visible if no objects were detected -->
+
+{% if error %}
+<div id="errorModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" class="close">&times;</span>
+        <p>Sorry, YOLO didn't find any objects.</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

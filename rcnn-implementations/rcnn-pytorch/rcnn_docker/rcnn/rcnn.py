@@ -1,11 +1,15 @@
 import os
+
 import cv2
+import matplotlib as mpl
+import numpy as np
+
+import torch
+import torchvision
 from torchvision import transforms
 from torchvision.models.detection import fasterrcnn_resnet50_fpn
-import torchvision
-import torch
-import numpy as np
-import matplotlib as mpl
+
+
 mpl.use('Agg')
 
 

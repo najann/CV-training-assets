@@ -1,0 +1,3 @@
+graft tl-demo/static
+graft tl-demo/templates
+global-exclude *.pyc

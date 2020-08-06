@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Transfer Learning Demo{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+<script>
+    function enableStyle(id) {
+        var element = document.getElementById(id);
+        element.className = element.className.replace(/\bdisabled\b/g, "");
+    }
+</script>
+{% endblock %}
+{% block content %}
+<div id="home_container">
+    <h1 class="subtitle">Welcome to the AntBee Transfer Learning Demo</h1>
+    <hr>
+    <form method="post" enctype="multipart/form-data" action="/analyze">
+        <label>Please upload the file you want to be classified. <br />
+            <input onclick="enableStyle('analyze')" type="file" id="unpredicted" name="unpredicted" accept="image" />
+        </label>
+        <div id="submitwrapper">
+            <button type="submit" id="analyze" class="disabled"> Start! </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

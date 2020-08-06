@@ -1,11 +1,12 @@
-from pyramid.view import view_config
+import os
+
+import numpy as np
+from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from pyramid.response import Response
-from pyramid.httpexceptions import HTTPFound
+from pyramid.view import view_config
 
-import os
-import numpy as np
-from rcnn import rcnn as rcnn
+from rcnn import rcnn
 
 
 class MainViews:
