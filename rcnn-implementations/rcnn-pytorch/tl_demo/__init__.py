@@ -8,6 +8,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 
 
 BENTO_URL = 'https://bentoml-her0ku-mtu5njy5odi3mgo.herokuapp.com'
+IMAGES = os.path.join('tl_demo', 'static', 'images')
 
 
 def create_app():
@@ -25,8 +26,8 @@ def create_app():
         if ext.lower() not in ('.png', '.jpg', '.jpeg'):
             # let's have some fun
             abort(418)
-        image.save(os.path.join('tl-demo', 'static', 'images', filename))
-        with open(os.path.join('tl-demo', 'static', 'images', filename), 'rb') as input:
+        image.save(IMAGES + os.sep + filename)
+        with open(IMAGES + os.sep + filename, 'rb') as input:
             rqt = requests.post(BENTO_URL + '/predict', headers={'Content-Type': 'image/*'},
                                 data=input.read())
         if rqt.status_code != 200:
@@ -35,7 +36,7 @@ def create_app():
 
     @app.route('/del/<img>', methods=['GET'])
     def delete_image(img):
-        img = os.path.join('tl-demo', 'static', 'images', img)
+        img = IMAGES + os.sep + img
         if os.path.exists(img):
             os.remove(img)
         return redirect(url_for('say_hello'))
