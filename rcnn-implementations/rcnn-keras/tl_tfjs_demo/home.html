@@ -2,12 +2,25 @@
   <head>
     <!-- Load the latest version of TensorFlow.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <script>
+      var loadFile = function(event) {
+        var image = document.getElementById("output");
+        image.src = URL.createObjectURL(event.target.files[0]);
+      };
+    </script>
   </head>
 
   <body>
-    <div id="console"></div>
-    <!-- Add an image that we will use to test -->
-    <img id="img" src="images/iu-6.jpeg" width="224" height="224" />
+    <input
+      type="file"
+      onchange="loadFile(event)"
+      id="upload_image"
+      name="upload_image"
+      accept="image"
+    />
+    <img id="output" onchange="analyze" />
+    <button type="submit" onclick="analyze()">Analyze</button>
     <!-- Load index.js after the content of the page -->
     <script type="text/javascript" src="js/model.js"></script>
   </body>
