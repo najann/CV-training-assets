@@ -1,3 +1,16 @@
 body {
-    width: 80%
+    width: 80%;
+    margin: auto;
+}
+
+#main {
+    width: 100%;
+    display: grid;
+    place-items: center
+}
+
+input,
+img,
+button {
+    margin: 20px;
 }

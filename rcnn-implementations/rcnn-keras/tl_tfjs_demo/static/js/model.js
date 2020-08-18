@@ -1,5 +1,5 @@
 async function init() {
-  model = await tf.loadLayersModel("http://127.0.0.1/");
+  model = await tf.loadLayersModel("api:80");
 }
 
 async function analyze() {

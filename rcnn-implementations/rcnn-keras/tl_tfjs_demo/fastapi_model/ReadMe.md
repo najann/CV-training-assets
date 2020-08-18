@@ -30,7 +30,7 @@ Consequently, I had to retrieve every layer from the pre-trained models (except 
 TFJS is an interesting offer to have a look at in terms of edge computing.
 However, as also mentioned in some articles, you have to bear in mind that users may get access to your model's definition.
 Therefore, TFJS seems to be fine for small private projects or public ones where nothing's at risk if you provide access to your model.
-On the other hand, I feel like TFJS has a considerable amount of pitfalls - e.g. which layers you can use, how to convert the format etc. - as soon as you don't want to stick with the provided models but build your own ones or do some transfer learning.
+On the other hand, I feel like TFJS has a considerable amount of pitfalls - e.g. which layers you can use, how to convert the format, etc. - as soon as you don't want to stick with the provided models but build your own ones or do some transfer learning.
 
 (I did not try to build a model in JavaScript itself. Maybe this is easier than transferring it from Python code.)
 
