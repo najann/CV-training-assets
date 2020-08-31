@@ -16,6 +16,7 @@ def initialize_net():
 
     # load YOLO object detector trained on COCO dataset (80 classes)
     net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
+
     return net
 
 
@@ -33,28 +34,22 @@ def process_image(image, net):
     # construct a blob from the input image and then perform a forward
     # pass of the YOLO object detector, giving us our bounding boxes and
     # associated probabilities
-    blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),
+    blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (608, 608),
                                  swapRB=True, crop=False)
     net.setInput(blob)
     layerOutputs = net.forward(ln)
+
     return layerOutputs
 
 
 def get_predictions(layerOutputs, confval=0.5, thresh=0.3):
 
     # initialize lists of detected bounding boxes, confidences, class IDs
-    global boxes
-    boxes = []
-    global confidences
-    confidences = []
-    global classIDs
-    classIDs = []
-    global idxs
-    idxs = []
+    global boxes, confidences, classIDs, idxs
+    boxes, confidences, classIDs, idxs = [], [], [], []
 
     if len(layerOutputs) == 0:
         return None
-
     # loop over layer outputs and detections
     for output in layerOutputs:
         for detection in output:
@@ -108,7 +103,7 @@ def annotate_image(image, idxs, name):
         fs = 4
 
     # initialize a list of colors to represent each possible class label
-    np.random.seed(80)
+    np.random.seed(len(LABELS))
     COLORS = np.random.randint(0, 256, size=(len(LABELS), 3),
                                dtype="uint8")
     image = cv2.imdecode(image, cv2.IMREAD_COLOR)

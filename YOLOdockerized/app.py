@@ -29,6 +29,10 @@ NET = initialize_net()
 
 application = default_app()
 
+######################
+#   Error Handlers   #
+######################
+
 
 @error(404)
 def error_handler_404(error):
@@ -45,11 +49,15 @@ def error_handler_418(error):
     return template('error', error='418')
 
 
+######################
+#       Routes       #
+######################
+
 @get('/')
 def index():
     return template('home')
 
-# delete output files
+# delete output files before returning to the home page
 @get('/del/<filename:re:.*\.jpg>')
 def del_image(filename):
     if os.path.exists(os.path.sep.join([IM_OUT, filename])):
@@ -87,7 +95,6 @@ def localize_classify():
     # convert image to numpy array and send through YOLO net
     image = np.asarray(bytearray(image.file.read()), dtype="uint8")
     layers = process_image(image, NET)
-
     idxs = get_predictions(layers, confidence, thresh)
     # no objects detected ? cause error modal to pop up
     if len(idxs) == 0:
