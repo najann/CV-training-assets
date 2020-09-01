@@ -9,7 +9,7 @@ import torchvision
 from torchvision import transforms
 from torchvision.models.detection import fasterrcnn_resnet50_fpn
 
-
+# use Agg if not in Jupyter notebook
 mpl.use('Agg')
 
 
@@ -27,19 +27,22 @@ COCO_INSTANCE_CATEGORY_NAMES = [
     'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'N/A', 'book',
     'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'
 ]
+TRANSFORMS = transforms.Compose([transforms.ToTensor()])
 
 model = fasterrcnn_resnet50_fpn(pretrained=True)
 model.eval()
-TRANSFORMS = transforms.Compose([transforms.ToTensor()])
 
 
 def read_img(img):
+
     image = cv2.imdecode(img, cv2.IMREAD_COLOR)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert to RGB
+    # Convert to RGB
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     return image
 
 
 def get_prediction(img, threshold=0.5):
+
     image = read_img(img)
     img = TRANSFORMS(image)
     pred = model([img])
@@ -48,27 +51,37 @@ def get_prediction(img, threshold=0.5):
     pred_boxes = [[(i[0], i[1]), (i[2], i[3])]
                   for i in list(pred[0]['boxes'].detach().numpy())]
     pred_score = list(pred[0]['scores'].detach().numpy())
+
     try:
+
         pred_t = [pred_score.index(x) for x in pred_score if x > threshold][-1]
         pred_boxes = pred_boxes[:pred_t+1]
-        pred_class = pred_class[:pred_t+1]
+        pred_class = pred_class[:pred_t + 1]
+
     except IndexError as ie:
+
         print(
             f'Sorry, no objects were detected that suit the threshold {threshold}')
-        pred_boxes = []
-        pred_class = []
+        pred_boxes, pred_class = [], []
+
     return pred_boxes, pred_class
 
 
 def make_result(img, name, boxes, classes):
+
+    # import has to stay here because it interferes with usage of Agg backend otherwise
     import matplotlib.pyplot as plt
+
     image = read_img(img)
     COLORS = np.random.randint(0, 256, size=(
         len(np.unique(classes)), 3), dtype="uint8")
     pred_dict = dict(zip(np.unique(classes), COLORS))
+
     for i in range(len(boxes)):
+
         color = tuple(int(c) for c in pred_dict[classes[i]])
         cv2.rectangle(image, boxes[i][0], boxes[i][1], color, thickness=3)
+
     plt.figure(figsize=(10, 20))
     plt.imshow(image)
     plt.xticks([])
@@ -76,6 +89,8 @@ def make_result(img, name, boxes, classes):
     markers = [plt.Line2D([0, 0], [0, 0], color=color/255,
                           marker='o', linestyle='') for color in pred_dict.values()]
     plt.legend(markers, pred_dict.keys(), numpoints=1)
+
     path = os.path.join('app', 'static', 'outputs', f'{name}.jpg')
     plt.savefig(path, bbox_inches='tight')
+
     return path
