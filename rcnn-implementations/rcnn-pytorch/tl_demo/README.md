@@ -11,7 +11,7 @@ Instead, the app makes an HTTP request to another container (heroku dyno/app) pr
 
 Again, the web app is constructed as a package so that a simple `pip install .` will take care of the correct setup (dependencies, etc.).
 
-## Model Serving With BentoML
+## :sparkles: Model Serving With BentoML
 
 With this demo, you'll also get to know a very handy method to make your ML model available independent from the web application's route.
 This is important if you're working with a microservice-architecture.
@@ -37,6 +37,8 @@ heroku container:push web
 heroku container:release web
 ```
 
+> Attention: Don't try to put the classifier class and `main()` into the same file. This will break the creation of you service (see [this section in the documentation](https://docs.bentoml.org/en/latest/concepts.html#creating-bentoservice))
+
 This will create a heroku app only for the TL model.
 Once your dyno is ready, insert the service's URL in line 10 of [\_\_init\_\_.py](./__init.py__) and continue with the [deployment of your web app](#deployment-using-the-makefile).
 
@@ -45,7 +47,7 @@ Once your dyno is ready, insert the service's URL in line 10 of [\_\_init\_\_.py
 This demo lets you benefit from a [Makefile](./Makefile) to cope with the Flask Docker deployment.
 Simply run `make build`, `make run`, `make kill` or `make herokup` to build your Docker image, [run](localhost:5000) a container locally, kill it or deploy it as a Heroku app (no need to create the app beforehand).
 
-### The Dockerfile
+### :whale: The Dockerfile
 
 For local development, you need to uncomment some lines in the [Dockerfile](./Dockerfile), so that your container is accessible.
 In addition, you should not use Flask's development server on heroku which is why you need a more reliable WSGI-server (e.g. gunicorn).

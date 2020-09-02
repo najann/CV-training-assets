@@ -1,6 +1,6 @@
 # Computer Vision with PyTorch
 
-## FasterRCNN
+## :running: FasterRCNN
 
 PyTorch, resp. the `torchvision` library, provides pre-trained models for typical computer vision problems (i.e. the implementation of common, efficient architectures).
 
