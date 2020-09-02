@@ -63,7 +63,7 @@ sudo chmod +x init_cluster.sh
 ### :white_check_mark: Google Cloud Platform
 
 As you can see, there is also a Dockerfile, which you'll need to deploy the FasterRCNN demo on Google Cloud Platform.
-After creating a new Google Cloud project and installing installing the gcloud CLI (walk through gcloud init, too :wink:) , build the Docker image:
+After creating a new Google Cloud project and installing the gcloud CLI (walk through gcloud init, too :wink:) , build the Docker image:
 
 ```bash
 docker build -t eu.gcr.io/<PROJECT_ID>/rcnn-simple
@@ -80,4 +80,6 @@ From the Google Kubernetes Engine Workloads menu in the Google Cloud Console, cl
 Select the image you just pushed to Container Registry and click _Deploy_.
 [This tutorial](https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app#console_1) explains the steps in more detail.
 
-_Note:_ The app on Google Cloud Platform and can be found [here](http://35.204.215.132:5000).
+_Note:_ The app's cluster on Google Cloud Platform is no longer available.
+Even though first-time users have a free credit of about 250€, this is depleted faster than you might expect.
+If you enable auto-scaling or manually increase the number of replicas, you'll quickly get billed for quite a few EC2 instances (=> summing up to more than half of the credit you got in just one month of one idling demo).
