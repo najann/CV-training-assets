@@ -10,7 +10,7 @@ CLASSES = ['ant', 'bee']
 
 
 def main():
-    model = torch.load('ft_ant_bees.pt')
+    model = torch.load('../ft_ant_bees.pt')
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     model_ft = models.resnet18(pretrained=True)
