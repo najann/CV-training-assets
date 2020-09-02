@@ -10,7 +10,7 @@ CLASSES = ['ant', 'bee']
 
 # The transformations required to resize, crop, normalize the image
 # so that it can be fed into the model for prediction
-transform = transforms.Compose([
+TRANSFORM = transforms.Compose([
     transforms.Resize(256),
     transforms.CenterCrop(224),
     transforms.ToTensor(),
@@ -31,7 +31,7 @@ class AntOrBeeClassifier(bentoml.BentoService):
         # convert the image to pillow image for PyTorch
         img = Image.fromarray(img)
         # perform the transformations, returns a tensor (3, 224, 224)
-        img = transform(img)
+        img = TRANSFORM(img)
 
         # Use eval mode for evaluation.
         self.artifacts.model.eval()
