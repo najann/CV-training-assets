@@ -6,7 +6,9 @@ services:
       - "8080:8080"
     links:
       - api
-    environment:
-      - modelip="api:80"
   api:
     build: ./fastapi_model
+    ports:
+      - "80:80"
+    environment:
+      - KEEP_ALIVE=10
