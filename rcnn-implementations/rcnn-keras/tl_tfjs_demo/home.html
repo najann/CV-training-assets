@@ -3,20 +3,77 @@
 <head>
   <!-- Load the latest version of TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="styles/main.css" />
   <script>
     var loadFile = function (event) {
-      var image = document.getElementById("output");
+      var image = document.getElementById("upload");
+      // directly display image 
       image.src = URL.createObjectURL(event.target.files[0]);
+      document.getElementById("submit").disabled = false;
+
     };
+
+    var analyzeFile = function () {
+      document.getElementById("analysis-result-loader").style.display = "grid";
+
+      const imgEl = document.getElementById("upload");
+      let input = tf.browser.fromPixels(imgEl);
+
+      document.getElementById("main").style.display = "none";
+      // force DOM update before continuing with analysis
+      // without timeout, display of the loader is skipped
+      setTimeout(() => {
+        analyze(input);
+      }, 1)
+    };
+
+    var back2Start = function () {
+      // remove result text+image
+      document.getElementById("main").style.display = "grid";
+      document.getElementById("upload_image").value = "";
+      document.getElementById("upload").src = "";
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("backbutton").style.display = "none";
+    }
   </script>
 </head>
 
 <body>
+  <div id="model-loader">
+    <h5 id="expl">Loading the model may take some time. Please be patient.</h5>
+    <div class="lds-ellipsis">
+      <!-- one div per bubble -->
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
   <div id="main">
     <input type="file" onchange="loadFile(event)" id="upload_image" name="upload_image" accept="image" />
-    <img id="output" />
-    <button type="submit" onclick="analyze()">Analyze</button>
+    <img id="upload" />
+    <button id="submit" type="submit" onclick="analyzeFile()">Analyze</button>
+  </div>
+  <div id="analysis-result-loader">
+    <h5 id="expl">Classification in progress...</h5>
+    <div class="lds-grid">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div id="result"></div>
+  <div id="backbutton">
+    <button type="button" id="back" onclick="back2Start()">
+      <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+    </button>
   </div>
   <!-- Load index.js after the content of the page -->
   <script type="text/javascript" src="js/model.js"></script>
