@@ -1,8 +1,8 @@
-# A FastAPI for the TFJS Model
+# A FastAPI For The TFJS Model
 
 _Date: 08/2020_
 
-## Get the TFJS Model
+## Get The TFJS Model
 
 [./model-tfjs-layer](model-tfjs-layer) contains a trained keras model which was converted to tensorflowJS format:
 
@@ -34,10 +34,16 @@ On the other hand, I feel like TFJS has a considerable amount of pitfalls - e.g.
 
 (I did not try to build a model in JavaScript itself. Maybe this is easier than transferring it from Python code.)
 
-## Serve your model files via FastAPI
+## Serve Your Model Files Via FastAPI
 
-### Creating an app
+### Creating An App
 
-This demo uses FastAPI to serve the `model.json` and bin files.
-It is a very small app and can be found in [./main.py](main.py).
-The Dockerfile in this subdirectory uses a base image provided by the team behind FastAPI.
+This demo uses FastAPI to serve the `model.json` and binary files (in subdirectory [model-tfjs-layer](./model-tfjs-layer)).
+It is a very small app and is defined in [./main.py](main.py).
+There are only two API endpoints: the entry point `/`, which returns the main `model.json` file, and `/group1-shardXofY.bin`.
+Subsequent to `model.json`, the latter is automatically called by the JS function `tf.loadLayersModel()` until it retrieved Y of Y shards.
+
+## Dockerizing The App
+
+The [Dockerfile](./Dockerfile) in this subdirectory uses a base image provided by the team behind FastAPI.
+So, all you have to add are ancillary libraries and the app's code.
