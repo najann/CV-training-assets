@@ -1,0 +1,15 @@
+version: "3"
+services:
+  web:
+    image: tl_tfjs_demo_web:latest
+    ports:
+      - "8080:8080"
+    links:
+      - api
+  api:
+    image: tl_tfjs_demo_api:latest
+    ports:
+      - "80:80"
+    environment:
+      - KEEP_ALIVE=20
+      - PORT=8081

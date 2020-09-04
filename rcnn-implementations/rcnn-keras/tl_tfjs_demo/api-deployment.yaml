@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - env:
+            - name: KEEP_ALIVE
+              value: "20"
+            - name: PORT
+              value: "8081"
+          image: us.icr.io/comvis/tfjs_api:latest
+          name: api
+          ports:
+            - containerPort: 8081
+      restartPolicy: Always
