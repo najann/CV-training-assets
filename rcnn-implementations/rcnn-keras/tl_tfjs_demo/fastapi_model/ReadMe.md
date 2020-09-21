@@ -4,7 +4,7 @@ _Date: 08/2020_
 
 ## Get The TFJS Model
 
-[./model-tfjs-layer](model-tfjs-layer) contains a trained keras model which was converted to tensorflowJS format:
+`./model-tfjs-layer` should contain a trained keras model which was converted to tensorflowJS format:
 
 1. Save you model using `model.save('model.h5')`.
 2. Use the tfjs-converter to build a tfjs-formatted model: `tensorflowjs_converter --input_format keras model.h5 model-tfjs-layer`.
@@ -17,7 +17,9 @@ _Date: 08/2020_
 You may tend to skip this paragraph but the following part from the documentation may save you quite some time:
 
 ```txt
-TensorFlow.js Layers currently only supports Keras models using standard Keras constructs. Models using unsupported ops or layers—e.g. custom layers, Lambda layers, custom losses, or custom metrics—cannot be automatically imported, because they depend on Python code that cannot be reliably translated into JavaScript.
+TensorFlow.js Layers currently only supports Keras models using standard Keras constructs. 
+Models using unsupported ops or layers — e.g. custom layers, Lambda layers, custom losses, or custom metrics — 
+cannot be automatically imported, because they depend on Python code that cannot be reliably translated into JavaScript.
 ```
 
 This means that you also cannot include layers from `tensorflow.keras.layers.experimental` (such as the image preprocessing layers).
