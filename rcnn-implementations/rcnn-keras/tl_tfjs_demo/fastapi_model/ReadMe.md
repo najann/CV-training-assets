@@ -40,7 +40,7 @@ On the other hand, I feel like TFJS has a considerable amount of pitfalls - e.g.
 
 ### Creating An App
 
-This demo uses FastAPI to serve the `model.json` and binary files (in subdirectory [model-tfjs-layer](./model-tfjs-layer)).
+This demo uses FastAPI to serve the `model.json` and binary files (in subdirectory `./model-tfjs-layer).
 It is a very small app and is defined in [./main.py](main.py).
 There are only two API endpoints: the entry point `/`, which returns the main `model.json` file, and `/group1-shardXofY.bin`.
 Subsequent to `model.json`, the latter is automatically called by the JS function `tf.loadLayersModel()` until it retrieved Y of Y shards.
