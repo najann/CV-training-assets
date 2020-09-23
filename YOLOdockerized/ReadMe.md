@@ -6,8 +6,16 @@ YOLO is a real-time object detector.
 With a single neural network evaluation, the bounding boxes for objects in an image as well as the respective class + probability are calculated.
 
 Currently, [v3](https://pjreddie.com/media/files/papers/YOLOv3.pdf) is the most often referenced and implemented version of YOLO.
-However, this year both [v4 and v5](https://towardsdatascience.com/yolo-v4-or-yolo-v5-or-pp-yolo-dad8e40f7109) have been introduced.
+However, this year, both [v4 and v5](https://towardsdatascience.com/yolo-v4-or-yolo-v5-or-pp-yolo-dad8e40f7109) have been introduced.
 The main YOLO implementations are based on [Darknet](https://pjreddie.com/darknet/), an open-source neural network framework.
+
+If you want to read more about YOLO, I can recommend the following websites:
+
+- [YOLOv4 Article by AlexeyAB](https://medium.com/@alexeyab84/yolov4-the-most-accurate-real-time-neural-network-on-ms-coco-dataset-73adfd3602fe)
+
+- [Darknet Usage and Training Guide](https://colab.research.google.com/drive/1_GdoqCJWXsChrOiY8sZMr_zbr_fH-0Fg?usp=sharing#scrollTo=G9Fv0wjCMPYY)
+
+- [YOLO architecture by Lutz Roeder](https://lutzroeder.github.io/netron/?url=https%3A%2F%2Fraw.githubusercontent.com%2FAlexeyAB%2Fdarknet%2Fmaster%2Fcfg%2Fyolov4.cfg)
 
 ## YOLO Implementation
 
