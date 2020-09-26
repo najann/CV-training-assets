@@ -24,5 +24,3 @@ Then, the image is fed into the model.
 Once the predictions are ready, they are marked in the iamge with rectangles and the assemblage is (optimized and) stored in the container.
 The result view displays this image and by clicking on it, a user could download it.
 If the user returns to the home page using the button below the image, the latter will be deleted to free up some space.
-
-## TensorflowJS
