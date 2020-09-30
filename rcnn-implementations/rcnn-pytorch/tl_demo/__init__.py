@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 from flask import Flask, abort, redirect, render_template, request, url_for
 
 
-BENTO_URL = 'https://bentoml-her0ku-mtu5njy5odi3mgo.herokuapp.com'
+BENTO_URL = 'https://bentoml-her0ku-mtu5njy5odi3mgo.herokuapp.com' # insert the URL of your deployed bento-service here
 IMAGES = os.path.join('tl_demo', 'static', 'images')
 
 
