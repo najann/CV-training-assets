@@ -9,20 +9,7 @@ app = FastAPI()
 # configure CORSMiddleware so that the
 # frontend can request the model files
 origins = [
-    # "http://0.0.0.0:8080/",
-    # "http://0.0.0.0:8080",
-    # "http://localhost:8080/",
-    # "http://localhost:8080",
-    # "http://127.0.0.1:8080/",
-    # "http://127.0.0.1:8080",
-    # "https://0.0.0.0:8080/",
-    # "https://0.0.0.0:8080",
-    # "https://localhost:8080",
-    # "https://localhost:8080/",
-    # "https://127.0.0.1:8080",
-    # "https://127.0.0.1:8080/",
-    # "http://api/",
-    # "https://api/",
+    # this is only a don't do this if you can circumvent it!
     "*"
 ]
 
