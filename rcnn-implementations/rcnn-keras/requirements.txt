@@ -1,6 +1,6 @@
 tensorflow==2.9.3
 opencv-contrib-python==4.3.0.36
-numpy==1.21.0
+numpy==1.22.0
 pandas==1.0.5
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
