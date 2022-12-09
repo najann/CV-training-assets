@@ -10,5 +10,5 @@ notebook==6.4.12
 jupyter==1.0.0
 jupyter-client==6.1.6
 jupyter-console==6.1.0
-jupyter-core==4.6.3
+jupyter-core==4.11.2
 sklearn==0.0
