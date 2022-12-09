@@ -2,7 +2,7 @@ bottle==0.12.19
 certifi==2022.12.7
 chardet==3.0.4
 idna==2.10
-numpy==1.19.0
+numpy==1.22.0
 opencv-python-headless==4.3.0.36
 requests==2.24.0
 urllib3==1.26.5
